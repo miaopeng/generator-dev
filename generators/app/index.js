@@ -40,37 +40,23 @@ module.exports = class extends Generator {
   }
 
   _writingNodeJS() {
-    this.fs.copy(
-      this.templatePath("nodejs/.editorconfig"),
-      this.destinationPath(".editorconfig")
-    );
-    this.fs.copy(
-      this.templatePath("nodejs/.eslintignore"),
-      this.destinationPath(".eslintignore")
-    );
+    this.fs.copy(this.templatePath("nodejs/.*"), this.destinationPath());
   }
 
   _writingMina() {
-    this.fs.copy(
-      this.templatePath("mina/.eslintrc.js"),
-      this.destinationPath(".eslintrc.js")
-    );
-    this.fs.copy(
-      this.templatePath("mina/.eslintignore"),
-      this.destinationPath(".eslintignore")
-    );
-    this.fs.copy(
-      this.templatePath("mina/.prettierrc"),
-      this.destinationPath(".prettierrc")
-    );
-    this.fs.copy(
-      this.templatePath("mina/.prettierignore"),
-      this.destinationPath(".prettierignore")
-    );
+    this.fs.copy(this.templatePath("mina/.*"), this.destinationPath());
   }
 
   install() {
-    // This.installDependencies();
+    this.yarnInstall(
+      [
+        "eslint",
+        "eslint-config-prettier",
+        "eslint-config-airbnb-base",
+        "eslint-plugin-import"
+      ],
+      { dev: true }
+    );
   }
 
   end() {
