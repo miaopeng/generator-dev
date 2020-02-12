@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['airbnb-base', 'prettier'],
+  extends: ['google', 'prettier'],
   env: {
     node: true,
     es6: true
@@ -12,10 +12,6 @@ module.exports = {
     'no-console': 0,
     'no-restricted-globals': 0,
     'no-underscore-dangle': 0,
-    'no-unused-vars': ['error', { varsIgnorePattern: 'regeneratorRuntime' }],
-    'import/no-unresolved': [2, { ignore: ['^@/'] }],
-    'import/no-extraneous-dependencies': [2, { optionalDependencies: true }],
-    'import/prefer-default-export': 0,
     'linebreak-style': 0,
     'no-plusplus': 0
   },

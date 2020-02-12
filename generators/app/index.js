@@ -1,25 +1,21 @@
-"use strict";
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
+'use strict';
+const Generator = require('yeoman-generator');
+const chalk = require('chalk');
+const yosay = require('yosay');
 
 module.exports = class extends Generator {
   async prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(
-        `Welcome to the flawless ${chalk.green(
-          "generator-dotfiles"
-        )} generator!`
-      )
+      yosay(`Welcome to the ${chalk.green('generator-dev')} generator!`)
     );
 
     const prompts = [
       {
-        type: "list",
-        name: "env",
-        message: "选择项目类型",
-        choices: ["nodejs", "mina"]
+        type: 'list',
+        name: 'env',
+        message: '选择项目类型',
+        choices: ['nodejs', 'mina']
       }
     ];
 
@@ -28,10 +24,10 @@ module.exports = class extends Generator {
 
   writing() {
     switch (this.props.env) {
-      case "nodejs":
+      case 'nodejs':
         this._writingNodeJS();
         break;
-      case "mina":
+      case 'mina':
         this._writingMina();
         break;
       default:
@@ -40,26 +36,40 @@ module.exports = class extends Generator {
   }
 
   _writingNodeJS() {
-    this.fs.copy(this.templatePath("nodejs/.*"), this.destinationPath());
+    this.fs.copy(this.templatePath('nodejs/.*'), this.destinationPath());
   }
 
   _writingMina() {
-    this.fs.copy(this.templatePath("mina/.*"), this.destinationPath());
+    this.fs.copy(this.templatePath('mina/.*'), this.destinationPath());
   }
 
   install() {
-    this.yarnInstall(
-      [
-        "eslint",
-        "eslint-config-prettier",
-        "eslint-config-airbnb-base",
-        "eslint-plugin-import"
-      ],
-      { dev: true }
-    );
+    let dependencies = [];
+
+    switch (this.props.env) {
+      case 'nodejs':
+        dependencies = [
+          'eslint',
+          'eslint-config-prettier',
+          'eslint-config-google'
+        ];
+        break;
+      case 'mina':
+        dependencies = [
+          'eslint',
+          'eslint-config-prettier',
+          'eslint-config-airbnb-base',
+          'eslint-plugin-import'
+        ];
+        break;
+      default:
+        break;
+    }
+
+    this.yarnInstall(dependencies, { dev: true });
   }
 
   end() {
-    this.log("bye");
+    this.log('bye');
   }
 };
