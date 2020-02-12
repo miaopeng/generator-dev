@@ -12,7 +12,8 @@ module.exports = class extends Generator {
 
     const pkgJson = {
       scripts: {
-        dev: 'gulp'
+        dev: 'gulp',
+        tasks: 'gulp --tasks'
       }
     };
 
@@ -21,7 +22,7 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.yarnInstall(['gulp', 'gulp-rename'], { dev: true });
+    this.yarnInstall(['gulp', 'gulp-load-all-tasks'], { dev: true });
   }
 
   end() {
