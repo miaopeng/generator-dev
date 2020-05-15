@@ -14,8 +14,5 @@ module.exports = {
     'no-underscore-dangle': 0,
     'linebreak-style': 0,
     'no-plusplus': 0
-  },
-  settings: {
-    polyfills: ['fetch', 'promises', 'url']
   }
 };

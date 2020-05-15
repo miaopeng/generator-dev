@@ -15,7 +15,7 @@ module.exports = class extends Generator {
         type: 'list',
         name: 'env',
         message: '选择项目类型',
-        choices: ['nodejs', 'mina']
+        choices: ['react', 'nodejs', 'mina']
       }
     ];
 
@@ -30,6 +30,9 @@ module.exports = class extends Generator {
       case 'mina':
         this._writingMina();
         break;
+      case 'react':
+        this._writingReact();
+        break;
       default:
         break;
     }
@@ -41,6 +44,10 @@ module.exports = class extends Generator {
 
   _writingMina() {
     this.fs.copy(this.templatePath('mina/.*'), this.destinationPath());
+  }
+
+  _writingReact() {
+    this.fs.copy(this.templatePath('react/.*'), this.destinationPath());
   }
 
   install() {
@@ -60,6 +67,18 @@ module.exports = class extends Generator {
           'eslint-config-prettier',
           'eslint-config-airbnb-base',
           'eslint-plugin-import'
+        ];
+        break;
+      case 'react':
+        dependencies = [
+          'eslint@6.8.0',
+          'eslint-config-airbnb@18.1.0',
+          'eslint-config-prettier@^6.11.0',
+          'eslint-plugin-compat@^3.6.0',
+          'eslint-plugin-import@^2.20.1',
+          'eslint-plugin-jsx-a11y@^6.2.3',
+          'eslint-plugin-react@^7.19.0',
+          'eslint-plugin-react-hooks@2.5.0'
         ];
         break;
       default:
